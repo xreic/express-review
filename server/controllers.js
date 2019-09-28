@@ -6,6 +6,7 @@ const controllers = {
     // THIS IS WHERE WE'D GET DATA FROM OUR DATABASE
     res.status(200).send(restaurants)
   },
+
   getOne: (req, res) => {
     // THIS IS WHERE WE'D GET DATA FROM THE DATABASE
     var restaurant = restaurants[req.params.id - 1]
@@ -15,6 +16,7 @@ const controllers = {
       res.status(404).send('No restaurant with id ' + req.params.id)
     }
   },
+
   postRestaurant: ({ body }, res) => {
     // THIS IS WHERE WE'D ADD DATA TO THE DATABASE
     if (body.name && body.rating) {
@@ -28,8 +30,9 @@ const controllers = {
     }
 
   },
+
   deleteRestaurant: ({ params }, res) => {
-    var restaurant = restaurants[params.id - 1]
+    var restaurant = restaurants[params.id]
     if (restaurant) {
       // THIS IS WHERE WE'D USE OUR DATABASE
       restaurants.splice(params.id, 1);
@@ -40,5 +43,5 @@ const controllers = {
   }
 }
 
-// Why won't this data persist
+// Why won't this data persist?
 module.exports = controllers;
