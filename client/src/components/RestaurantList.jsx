@@ -6,6 +6,7 @@ const RestaurantList = ({ restaurants }) => (
       <RestaurantListEntry
         restaurant={restaurant}
         key={i}
+        index={i}
       />
     ))}
   </div>
