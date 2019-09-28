@@ -29,4 +29,5 @@
 
 ## EXTRA CREDIT
 - Refactor your server to connect to your database instead of using the data from restaurants.json
+- Add an update route 
 - Add an additional endpoint to your server
