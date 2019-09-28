@@ -12,6 +12,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.get('/restaurants', controllers.getAll);
-app.get('/restaurants/:id', controllers.getOne)
+app.get('/restaurants/:id', controllers.getOne);
+
+app.post('/restaurants', controllers.postRestaurant);
+
+app.delete('/restaurants/:id', controllers.deleteRestaurant);
 
 app.listen(port, console.log(`${port} is listening`))
