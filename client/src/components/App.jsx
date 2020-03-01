@@ -7,68 +7,72 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      restaurants: [
-        {
-          "id": 1,
-          "restaurant_name": "Howlin Rays",
-          "rating": 5
-        },
-        {
-          "id": 2,
-          "restaurant_name": "Mariscos Jalisco",
-          "rating": 5
-        },
-        {
-          "id": 3,
-          "restaurant_name": "Hummus Factory",
-          "rating": 4
-        },
-        {
-          "id": 4,
-          "restaurant_name": "Joy",
-          "rating": 4
-        },
-        {
-          "id": 5,
-          "restaurant_name": "Rustic Canyon",
-          "rating": 5
-        }
-      ]
-    }
+      restaurants: [],
+    };
     this.getRestaurants = this.getRestaurants.bind(this);
     this.deleteRestaurant = this.deleteRestaurant.bind(this);
     this.addRestaurant = this.addRestaurant.bind(this);
   }
 
-
   getRestaurants() {
-    // TODO
+    /**
+     *  Axios is promise based
+     *  Sending a get request to /restaurants endpoint
+     *  When the promised data is given
+     *  Use it to set the state
+     */
+    axios
+      .get('/restaurants')
+      .then((response) => {
+        this.setState({
+          restaurants: response.data,
+        });
+      })
+      .catch((err) => console.error(err));
   }
 
-  deleteRestaurant() {
-    // TODO
+  deleteRestaurant(index) {
+    axios
+      .delete(`/restaurants/${index}`)
+      .then(() => this.getRestaurants())
+      .catch((err) => console.error(err));
   }
 
-  addRestaurant() {
-    // TODO
+  addRestaurant({ name, rating }) {
+    /**
+     *  For put and post requests
+     *  Data being sent over is put into the second argument as an object
+     */
+    axios
+      .post('/restaurants', {
+        name,
+        rating,
+      })
+      .then(() => {
+        this.getRestaurants();
+      })
+      .catch((err) => console.error(err));
   }
 
   componentDidMount() {
     this.getRestaurants();
   }
 
-
   render() {
     return (
       <div className="body">
         <div className="heading">Welp!</div>
-        {this.state.restaurants.length ?
-          <RestaurantList restaurants={this.state.restaurants} />
-          :
-          <div className="error">Fix your get request!</div>}
-        <AddRestaurantForm />
+        {this.state.restaurants.length ? (
+          <RestaurantList
+            restaurants={this.state.restaurants}
+            deleteRestaurant={this.deleteRestaurant}
+          />
+        ) : (
+          <div className="error">Fix your get request!</div>
+        )}
+        <AddRestaurantForm addRestaurant={this.addRestaurant} />
       </div>
-    )
+    );
   }
 }
 
