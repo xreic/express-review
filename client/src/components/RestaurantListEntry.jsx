@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RestaurantListEntry = ({ restaurant, key, index, deleteRestaurant }) => (
+const RestaurantListEntry = ({ restaurant, index, deleteRestaurant }) => (
   <div className="entry">
     <div className="name">{restaurant.restaurant_name}</div>
     <div className="rating">

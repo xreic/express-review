@@ -62,13 +62,13 @@ const controllers = {
   },
 
   deleteOne: (request, response) => {
-    let restaurant = restaurant[request.params.id];
+    let restaurant = restaurants[request.params.id];
 
     if (restaurant) {
-      restaurant.splice(request.params.id, 1);
+      restaurants.splice(request.params.id, 1);
       response
         .status(200)
-        .send(`Remmoved restaurant at index ${request.params.id}.`)
+        .send(`Removed restaurant at index ${request.params.id}.`)
         .end();
     } else {
       response

@@ -9,6 +9,7 @@ class App extends React.Component {
     this.state = {
       restaurants: [],
     };
+
     this.getRestaurants = this.getRestaurants.bind(this);
     this.deleteRestaurant = this.deleteRestaurant.bind(this);
     this.addRestaurant = this.addRestaurant.bind(this);
